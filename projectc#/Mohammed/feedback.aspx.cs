@@ -7,7 +7,7 @@ namespace projectc_.Mohammed
 {
     public partial class feedback : System.Web.UI.Page
     {
-        string feedbackFilePath = HttpContext.Current.Server.MapPath("~/App_Data/Feedback.txt");
+        string feedbackFilePath = HttpContext.Current.Server.MapPath("~/App_Data/FeedbackData.txt");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace projectc_.Mohammed
                 // ✅ **حفظ الملاحظات في `Feedback.txt`**
                 using (StreamWriter sw = new StreamWriter(feedbackFilePath, true))
                 {
-                    sw.WriteLine($"{userEmail} | {feedbackType} | {feedbackText} | {DateTime.Now}");
+                    sw.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt", new System.Globalization.CultureInfo("ar-JO"))}|{userEmail}|{feedbackType}|{feedbackText}{Environment.NewLine}");
                 }
 
                 // ✅ **إظهار `Popup` ثم إعادة التوجيه بعد 2 ثانية**

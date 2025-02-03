@@ -1,0 +1,23 @@
+
+khalid@gmail.com|1|Thinking, Fast and Slow|Daniel Kahneman|Psychology|thinking.jpg|borrowed
+khalid@gmail.com|20|The Millionaire Fastlane|MJ DeMarco|Finance|Miltones.jpg|borrowed
+khalid@gmail.com|2|Atomic Habits|James Clear|Psychology|81ANaVZk5LL.jpg|pending
+khalid@gmail.com|2|Atomic Habits|James Clear|Psychology|81ANaVZk5LL.jpg|pending
+khalid@gmail.com|3|The Power of Habit|Charles Duhigg|Psychology|habits.jpg|borrowed
+khalid@gmail.com|5|Grit: The Power of Passion and Perseverance|Angela Duckworth|Psychology|PowerOfPassion.jpg|pending
+khalid@gmail.com|6|C# in Depth|Jon Skeet|Programming|cSharp.jpg|pending
+khalid@gmail.com|7|The Pragmatic Programmer|Andrew Hunt & David Thomas|Programming|paramitic.jpg|pending
+khalid@gmail.com|10|Design Patterns: Elements of Reusable Object-Oriented Software|Gang of Four|Programming|DesignPattern.jpg|pending
+khalid@gmail.com|4|The 48 Laws of Power|Robert Greene|Psychology|PowerOfHabits.jpg|pending
+khalid@gmail.com|22|Mohamad|Mohamad|pROG|51E2055ZGUL._AC_UF1000,1000_QL80_.jpg|borrowed
+khalid@gmail.com|21|Financial Freedom|Grant Sabatier|Finance|FinanicalFreedom.jpg|borrowed
+khalid@gmail.com|20|The Millionaire Fastlane|MJ DeMarco|Finance|Miltones.jpg|borrowed
+khalid@gmail.com|4|The 48 Laws of Power|Robert Greene|Psychology|PowerOfHabits.jpg|pending
+khalid@gmail.com|22|Mohamad|Mohamad|pROG|51E2055ZGUL._AC_UF1000,1000_QL80_.jpg|borrowed
+khalid@gmail.com|21|Financial Freedom|Grant Sabatier|Finance|FinanicalFreedom.jpg|borrowed
+khalid@gmail.com|20|The Millionaire Fastlane|MJ DeMarco|Finance|Miltones.jpg|borrowed
+khalid@gmail.com|19|I Will Teach You to Be Rich|Ramit Sethi|Finance|teachYouRich.jpg|pending
+khalid@gmail.com|18|The Psychology of Money|Morgan Housel|Finance|physMoney.jpg|pending
+khalid@gmail.com|17|The Intelligent Investor|Benjamin Graham|Finance|intelligent.jpg|pending
+khalid@gmail.com|16|Rich Dad Poor Dad|Robert Kiyosaki|Finance|richdad.jpg|pending
+khalid@gmail.com|13|This Is Marketing|Seth Godin|Marketing|ThisMarketing.jpg|borrowed

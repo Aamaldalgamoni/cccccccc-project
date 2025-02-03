@@ -23,29 +23,36 @@ namespace projectc_.khalid
             if (File.Exists(filePath))
             {
                 string[] data = File.ReadAllLines(filePath);
+                bool bookFound = false; // to follow the book
+
                 foreach (string line in data)
                 {
                     string[] parts = line.Split('|');
-                    if (parts.Length >= 3 && parts[0].Trim() == book) // Check if id matches
+                    if (parts.Length >= 4 && parts[0].Trim() == book) // Check if id matches
                     {
-                        // Populate the fields with user data
+                        // Populate the fields with book data
                         BookID.Text = parts[0].Trim();
                         Title.Text = parts[1].Trim();
                         Author.Text = parts[2].Trim();
                         Genre.Text = parts[3].Trim();
 
-
-                        break; // Exit the loop once the user is found
+                        bookFound = true; // book found
+                        break; // Exit the loop once the book is found
                     }
-                    else
-                        Response.Write("<script>alert('Book not found!');</script>");
+                }
+
+                if (!bookFound)
+                {
+                    Response.Write("<script>alert('Book not found!');</script>");
+
                 }
             }
             else
             {
-                Response.Write("<script>alert('User data file not found!');</script>");
+                Response.Write("<script>alert('Books data file not found!');</script>");
             }
         }
+
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {

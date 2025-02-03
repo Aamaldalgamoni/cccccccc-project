@@ -34,7 +34,7 @@ namespace projectc_.Amal
                 }
             }
 
-            Response.Redirect("page1.aspx");
+            Response.Redirect("~/hala2/WebForm1.aspx");
             }
 
         protected void back2_Click(object sender, EventArgs e) { Response.Redirect("~/hala2/WebForm1.aspx");

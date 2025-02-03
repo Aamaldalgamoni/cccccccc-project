@@ -64,6 +64,9 @@ namespace projectc_.khalid
         }
 
         // Handles accept or cancel actions from the GridView
+        // Handles accept or cancel actions from the GridView
+        // Handles accept or cancel actions from the GridView
+        // Handles accept or cancel actions from the GridView
         protected void BooksGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "AcceptRequest")
@@ -71,7 +74,6 @@ namespace projectc_.khalid
                 string bookId = e.CommandArgument.ToString();
                 string borrowFilePath = Server.MapPath("borrow.txt");
 
-                // Ensure borrow.txt exists
                 if (!File.Exists(borrowFilePath))
                 {
                     lblMessage.Text = "Error: borrow.txt not found.";
@@ -79,61 +81,110 @@ namespace projectc_.khalid
                     return;
                 }
 
-                // Read all lines from borrow.txt
+                // Read all borrow requests
                 string[] borrowedBooks = File.ReadAllLines(borrowFilePath);
                 var updatedRequests = new List<string>();
+                string email = string.Empty;
+                string bookTitle = string.Empty;
 
                 foreach (string book in borrowedBooks)
                 {
                     string[] parts = book.Split('|');
 
-                    // Ensure the line has the expected number of fields
                     if (parts.Length >= 7 && parts[1] == bookId)
                     {
-                        // Update status to "borrowed"
+                        email = parts[0]; // Get the user's email
+                        bookTitle = parts[2]; // Get the book title
+
+                        // Check if the email is in the blacklist
+                        if (IsEmailInBlacklist(email))
+                        {
+                            lblMessage.Text = "This user is blacklisted and cannot borrow books.";
+                            lblMessage.Visible = true;
+                            return;
+                        }
+
+                        // Change status to "borrowed"
                         parts[6] = "borrowed";
-                        updatedRequests.Add(string.Join("|", parts));
                     }
-                    else
-                    {
-                        updatedRequests.Add(book);
-                    }
+
+                    updatedRequests.Add(string.Join("|", parts));
                 }
 
-                // Write the updated requests back to borrow.txt
+                // Write back the updated list
                 File.WriteAllLines(borrowFilePath, updatedRequests);
 
-                // Redirect to AllBooks.aspx to reflect the changes
-                Response.Redirect("AllBooks.aspx");
-            }
-            else if (e.CommandName == "CancelRequest")
-            {
-                // Logic to cancel the borrow request, remove from borrow.txt
-                string bookId = e.CommandArgument.ToString();
-                string borrowFilePath = Server.MapPath("borrow.txt");
-
-                // Ensure borrow.txt exists
-                if (!File.Exists(borrowFilePath))
-                {
-                    lblMessage.Text = "Error: borrow.txt not found.";
-                    lblMessage.Visible = true;
-                    return;
-                }
-
-                // Read borrow.txt and filter out the canceled request
-                string[] borrowedBooks = File.ReadAllLines(borrowFilePath);
-                var updatedRequests = borrowedBooks.Where(b => !b.StartsWith(bookId)).ToList();
-
-                // Write the updated list back to borrow.txt
-                File.WriteAllLines(borrowFilePath, updatedRequests);
-
-                lblMessage.Text = "Borrow request canceled.";
+                lblMessage.Text = "Borrow request approved.";
                 lblMessage.Visible = true;
 
-                // Reload the borrow requests after cancellation
+                // Start the countdown for the user after accepting the request
+                if (!string.IsNullOrEmpty(email))
+                {
+                    StartCountdownForReturn(email, bookId, bookTitle); // Pass book title as well
+                }
+
+                // Refresh the grid to reflect the change
                 LoadRequestedBooks();
             }
         }
+
+
+
+        // Function to check if email is in the blacklist
+        private bool IsEmailInBlacklist(string email)
+        {
+            string blacklistFilePath = Server.MapPath("blacklist.txt");
+
+            // Ensure the blacklist file exists
+            if (File.Exists(blacklistFilePath))
+            {
+                string[] blacklistedEmails = File.ReadAllLines(blacklistFilePath);
+
+                // Check if the email is in the blacklist
+                return blacklistedEmails.Any(line => line.StartsWith(email + "|"));
+            }
+
+            return false;
+        }
+
+
+
+        private void StartCountdownForReturn(string email, string bookId, string bookTitle)
+        {
+            // Simulate a 20-second countdown after approval
+            var timer = new System.Threading.Timer((state) =>
+            {
+                // After 20 seconds, check if the book has been returned, if not, blacklist the user
+                CheckBookReturnStatusAndBlacklist(email, bookId, bookTitle);
+            }, null, 10000, System.Threading.Timeout.Infinite);
+        }
+
+
+        private void CheckBookReturnStatusAndBlacklist(string email, string bookId, string bookTitle)
+        {
+            string borrowFilePath = Server.MapPath("borrow.txt");
+            string[] borrowedBooks = File.ReadAllLines(borrowFilePath);
+            bool returned = borrowedBooks.Any(b => b.Contains(bookId) && b.Contains("returned"));
+
+            if (!returned)
+            {
+                // Blacklist the user if the book is not returned
+                AddToBlacklist(email, bookTitle);
+            }
+        }
+
+
+        // Blacklist user if they fail to return a book
+        private void AddToBlacklist(string email, string bookTitle)
+        {
+            string blacklistFilePath = Server.MapPath("blacklist.txt");
+            using (StreamWriter writer = new StreamWriter(blacklistFilePath, true))
+            {
+                writer.WriteLine($"{email}|{bookTitle}");
+            }
+        }
+
+
 
         // Button to edit books (redirects to UpdateBooks page)
         protected void btnEditBook_Click(object sender, EventArgs e)

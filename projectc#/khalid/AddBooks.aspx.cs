@@ -19,6 +19,7 @@ namespace projectc_.khalid
             string filePath = Server.MapPath("books.txt");
             string uploadFolderPath = Server.MapPath("~/khalid/Images/");
 
+            // for images
             if (!Directory.Exists(uploadFolderPath))
             {
                 Directory.CreateDirectory(uploadFolderPath);
@@ -44,13 +45,13 @@ namespace projectc_.khalid
 
             if (bookExists)
             {
-                Response.Write("<script>alert('A book with this ID already exists!');</script>");
+                Response.Write("<script>alert('A Book with this ID already exists!');</script>");
             }
             else
             {
                 string imageFileName = "default.jpg";
 
-                if (FileUpload1.HasFile)
+                if (FileUpload1.HasFile) // check if he upload image
                 {
                     string fileExtension = Path.GetExtension(FileUpload1.FileName).ToLower();
                     if (fileExtension == ".jpg" || fileExtension == ".png" || fileExtension == ".jpeg")

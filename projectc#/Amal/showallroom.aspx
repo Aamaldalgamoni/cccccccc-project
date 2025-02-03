@@ -3,8 +3,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <title>Show All Rooms</title>
     <style>
         body {
@@ -24,7 +27,6 @@
 
         .table {
             width: 100%;
-            table-layout: fixed;
             margin-top: 30px;
             border-collapse: collapse;
         }
@@ -55,33 +57,101 @@
             margin-bottom: 30px;
         }
 
-        /* Responsive table */
-        .table-responsive {
-            overflow-x: auto;
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container">
-            <h2>All Room </h2>
+             <button type="button" class="btn btn-success" onclick="exportToPDF()">Export to PDF</button>
+ <button type="button" class="btn btn-success" onclick="exportToExcel()">Export to Excel</button>
+            <h2>All Rooms</h2>
 
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Room ID</th>
-                        <th scope="col">Room Name</th>
-                        <th scope="col">Room Capacity</th>
-                        <th scope="col">Room Location</th>
+                        <th>Room ID</th>
+                        <th>Room Name</th>
+                        <th>Room Capacity</th>
+                        <th>Room Location</th>
                     </tr>
                 </thead>
-
-                <tbody id="tableBody" runat="server">
-                </tbody>
+                <tbody id="tableBody" runat="server"></tbody>
             </table>
-            <asp:Button ID="back2" runat="server" OnClick="back2_Click" Text="Go back"  CssClass="btn btn-primary"  />
+
+            <div class="btn-container">
+                <asp:Button ID="back2" runat="server" OnClick="back2_Click" Text="Go back" CssClass="btn btn-primary" />
+               
+            </div>
         </div>
     </form>
+
+    <script>
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            let doc = new jsPDF();
+
+            doc.text("Room List", 14, 10);
+
+            let table = document.querySelector(".table");
+            let headers = [];
+            let data = [];
+
+            // استخراج رؤوس الأعمدة
+            table.querySelectorAll("thead th").forEach(th => headers.push(th.innerText.trim()));
+
+            // استخراج البيانات بدون تكرار
+            table.querySelectorAll("tbody tr").forEach(tr => {
+                let rowData = [];
+                tr.querySelectorAll("td").forEach(td => rowData.push(td.innerText.trim()));
+                if (rowData.length === headers.length) {
+                    data.push(rowData);
+                }
+            });
+
+            if (data.length === 0) {
+                alert("No data available to export!");
+                return;
+            }
+
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 20
+            });
+
+            doc.save("RoomList.pdf");
+        }
+
+        function exportToExcel() {
+            let table = document.querySelector(".table");
+            let headers = [];
+            let data = [];
+
+            table.querySelectorAll("thead th").forEach(th => headers.push(th.innerText.trim()));
+
+            table.querySelectorAll("tbody tr").forEach(tr => {
+                let rowData = [];
+                tr.querySelectorAll("td").forEach(td => rowData.push(td.innerText.trim()));
+                if (rowData.length === headers.length) {
+                    data.push(rowData);
+                }
+            });
+
+            if (data.length === 0) {
+                alert("No data available to export!");
+                return;
+            }
+
+            let wb = XLSX.utils.book_new();
+            let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+
+            XLSX.utils.book_append_sheet(wb, ws, "Rooms");
+            XLSX.writeFile(wb, "RoomList.xlsx");
+        }
+    </script>
 </body>
 </html>
-

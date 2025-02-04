@@ -7,11 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Requested Books</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        #backButton {
+            margin-bottom: 20px;
+            background: #0d6efd;
+        }
+
+            #backButton:hover {
+                background: #fff;
+                color: #0d6efd;
+                border-color: #0d6efd;
+            }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container mt-4">
             <h2 class="text-center mb-4">📚 Requested Books</h2>
+
+            <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary" OnClick="backButton_Click">
+        <i class="fa-solid fa-arrow-left fa-2x"></i> 
+            </asp:LinkButton>
 
             <!-- Success/Error Message -->
             <asp:Label ID="lblMessage" runat="server" CssClass="alert" Visible="false"></asp:Label>

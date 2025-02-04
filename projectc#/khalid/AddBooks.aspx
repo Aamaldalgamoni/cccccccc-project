@@ -93,12 +93,28 @@
         .center-button .btn-warning {
             width: 20%;
         }
+        #backButton {
+    margin-bottom: 20px;
+    background: #0d6efd;
+    
+}
+#backButton:hover {
+    background: #fff;
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
     </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
         <div class="container mt-5">
             <h2 class="page-title">Library Management System</h2>
+            
+            <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary" OnClick="backButton_Click">
+                <i class="fa-solid fa-arrow-left fa-2x"></i> 
+            </asp:LinkButton>
 
             <div class="card p-3 mb-4">
                 <h2 class="mb-4 head">Add Book</h2>

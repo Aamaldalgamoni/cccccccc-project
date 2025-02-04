@@ -51,8 +51,7 @@
 
         #btnUpdateBook {
             color: #ffffff;
-                width: 20%;
-
+            width: 20%;
         }
 
         h4 {
@@ -67,28 +66,43 @@
             margin-top: 20px;
         }
 
-        .btn-group .btn {
-            width: 32%;
-            margin-right: 100px; /* Adding space between buttons */
+            .btn-group .btn {
+                width: 32%;
+                margin-right: 100px; /* Adding space between buttons */
+            }
 
-        }
-
-        /* Remove right margin from the last button */
-        .btn-group .btn:last-child {
-            margin-right: 0;
-        }
+                /* Remove right margin from the last button */
+                .btn-group .btn:last-child {
+                    margin-right: 0;
+                }
 
         /* Style the inputs for Image Filename aligned with Author */
         .row .col-md-6 {
             margin-bottom: 10px;
         }
+
+        #backButton {
+            margin-bottom: 20px;
+            background: #0d6efd;
+            width: 7%;
+        }
+
+            #backButton:hover {
+                background: #fff;
+                color: #0d6efd;
+                border-color: #0d6efd;
+            }
     </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container">
             <h2 class="text-center mb-4">📚 Library Management System</h2>
-
+                <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary" OnClick="backButton_Click">
+        <i class="fa-solid fa-arrow-left fa-2x"></i> 
+    </asp:LinkButton>
             <!-- 📌 Add or Edit Books Form -->
             <div class="card p-3 mb-3">
                 <h4 class="mb-3">Update Books</h4>

@@ -80,12 +80,27 @@
         .mt-4 {
             margin-top: 20px;
         }
+
+        #backButton {
+            margin-bottom: 20px;
+            background: #0d6efd;
+        }
+
+            #backButton:hover {
+                background: #fff;
+                color: #0d6efd;
+                border-color: #0d6efd;
+            }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container">
             <h2 class="text-center mb-4">📚 Library Management System</h2>
+            <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary" OnClick="backButton_Click">
+        <i class="fa-solid fa-arrow-left fa-2x"></i> 
+            </asp:LinkButton>
 
             <!-- 📌 Add or Edit Books Form -->
             <div class="card p-3 mb-3">

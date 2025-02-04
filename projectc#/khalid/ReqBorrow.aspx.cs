@@ -268,6 +268,12 @@ namespace projectc_.khalid
         {
             Response.Redirect("AddBooks.aspx");
         }
+
+        protected void backButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/hala2/BookCards.aspx");
+
+        }
     }
 
     // Book class representing the book information

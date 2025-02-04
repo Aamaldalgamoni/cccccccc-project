@@ -11,6 +11,12 @@ namespace projectc_
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            this.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+
+
+
             lblmsg.Visible = false;
             filePath = Server.MapPath("addroomfile.txt"); // مسار ملف الغرف
 
@@ -128,7 +134,7 @@ namespace projectc_
 
         protected void back1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("page1.aspx");
+            Response.Redirect("~/hala2/RoomCards.aspx");
         }
     }  
 }

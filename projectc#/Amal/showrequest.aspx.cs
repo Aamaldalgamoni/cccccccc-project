@@ -69,7 +69,7 @@ namespace projectc_.Amal
 
         protected void back3_Click(object sender, EventArgs e)
         {
-            Response.Redirect("page1.aspx");
+            Response.Redirect("~/hala2/RoomCards.aspx");
         }
     }
 }

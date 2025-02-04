@@ -24,6 +24,15 @@ namespace projectc_
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+
+        /// <summary>
         /// lblSelectRoom control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace projectc_
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRooms;
+
+        /// <summary>
+        /// reqRoomSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomSelect;
 
         /// <summary>
         /// lblRoomName control.
@@ -60,6 +78,15 @@ namespace projectc_
         protected global::System.Web.UI.WebControls.TextBox txtRoomName;
 
         /// <summary>
+        /// reqRoomName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomName;
+
+        /// <summary>
         /// lblCapacity control.
         /// </summary>
         /// <remarks>
@@ -78,6 +105,24 @@ namespace projectc_
         protected global::System.Web.UI.WebControls.TextBox txtCapacity;
 
         /// <summary>
+        /// reqCapacity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCapacity;
+
+        /// <summary>
+        /// regexCapacity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexCapacity;
+
+        /// <summary>
         /// lblDescription control.
         /// </summary>
         /// <remarks>
@@ -94,6 +139,15 @@ namespace projectc_
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
+
+        /// <summary>
+        /// reqDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDescription;
 
         /// <summary>
         /// btnUpdateRoom control.

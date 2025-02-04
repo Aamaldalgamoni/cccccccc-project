@@ -59,6 +59,24 @@ namespace projectc_.Mohammed
                 Session["UserEmail"] = userEmail;
                 Session["UserName"] = userName;
 
+
+
+                string loggedFilePath = Server.MapPath("~/App_Data/logged.txt");
+
+                try
+                {
+                    File.AppendAllText(loggedFilePath, userEmail + Environment.NewLine);
+                }
+                catch (Exception ex)
+                {
+                    lblmsg.Text = "⚠ Error logging user: " + ex.Message;
+                    lblmsg.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+
+
+
                 string script = @"
                     document.getElementById('successPopup').style.display = 'block';
                     setTimeout(function() {

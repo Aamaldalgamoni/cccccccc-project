@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,32 +12,41 @@ namespace projectc_.Amal
         {
 
         }
+
         protected void sendreserve_Click(object sender, EventArgs e)
         {
-            string file1 = Server.MapPath("reserveroom.txt"); // مسار ملف الحجوزات
-
-            string reservationData = $"{idroom.Text},{nameroom.Text},{dateroom.Text},{timeroom.Text},Pending"; // بيانات الحجز مع حالة "Pending"
-
-            if (!File.Exists(file1)) // إذا كان الملف غير موجود
+            // التحقق من أن جميع الحقول ممتلئة
+            if (string.IsNullOrWhiteSpace(idroom.Text) ||
+                string.IsNullOrWhiteSpace(nameroom.Text) ||
+                string.IsNullOrWhiteSpace(dateroom.Text) ||
+                string.IsNullOrWhiteSpace(timeroom.Text))
             {
-                using (StreamWriter rw = File.CreateText(file1)) // إنشاء الملف وكتابة البيانات
+                Response.Write("<script>alert('⚠️ All fields are required! Please fill in all details.');</script>");
+                return;
+            }
+
+            string file1 = Server.MapPath("reserveroom.txt");
+
+            string reservationData = $"{idroom.Text},{nameroom.Text},{dateroom.Text},{timeroom.Text},Pending";
+
+            if (!File.Exists(file1))
+            {
+                using (StreamWriter rw = File.CreateText(file1))
                 {
                     rw.WriteLine(reservationData);
                 }
             }
-            else // إذا كان الملف موجودًا
+            else
             {
-                using (StreamWriter sr1 = new StreamWriter(file1, true)) // إضافة البيانات إلى الملف
+                using (StreamWriter sr1 = new StreamWriter(file1, true))
                 {
                     sr1.WriteLine(reservationData);
                 }
             }
 
-            // إظهار رسالة نجاح
-            Response.Write("<script>alert('Reservation request sent successfully!');</script>");
+            // رسالة نجاح وتحويل المستخدم إلى صفحة الداشبورد
+            Response.Write("<script>alert('✅ Reservation request sent successfully!');</script>");
             Response.Redirect("userdash.aspx");
         }
-        
     }
 }
-    

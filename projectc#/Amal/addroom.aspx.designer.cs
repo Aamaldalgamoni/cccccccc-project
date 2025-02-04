@@ -24,6 +24,15 @@ namespace projectc_.Amal
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+
+        /// <summary>
         /// roomid control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace projectc_.Amal
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox roomid;
+
+        /// <summary>
+        /// reqRoomID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomID;
 
         /// <summary>
         /// roomname control.
@@ -42,6 +60,15 @@ namespace projectc_.Amal
         protected global::System.Web.UI.WebControls.TextBox roomname;
 
         /// <summary>
+        /// reqRoomName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomName;
+
+        /// <summary>
         /// roomcapacity control.
         /// </summary>
         /// <remarks>
@@ -49,6 +76,15 @@ namespace projectc_.Amal
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox roomcapacity;
+
+        /// <summary>
+        /// reqRoomCapacity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomCapacity;
 
         /// <summary>
         /// roomlocation control.
@@ -60,22 +96,13 @@ namespace projectc_.Amal
         protected global::System.Web.UI.WebControls.TextBox roomlocation;
 
         /// <summary>
-        /// tstart control.
+        /// reqRoomLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tstart;
-
-        /// <summary>
-        /// tend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tend;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRoomLocation;
 
         /// <summary>
         /// butadd control.
@@ -87,12 +114,12 @@ namespace projectc_.Amal
         protected global::System.Web.UI.WebControls.Button butadd;
 
         /// <summary>
-        /// back2 control.
+        /// btnGoHome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button back2;
+        protected global::System.Web.UI.WebControls.Button btnGoHome;
     }
 }

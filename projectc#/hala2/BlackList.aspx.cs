@@ -23,7 +23,7 @@ namespace projectc_.hala2
 
         protected void blockedUser_Click(object sender, EventArgs e)
         {
-            var filepath = Server.MapPath("~/Khalid/blacklist.txt"); // Ensure the file exists
+            var filepath = Server.MapPath("~/khalid/blacklist.txt"); // Ensure the file exists
             if (!File.Exists(filepath))
             {
                 //feed.InnerHtml = "<p>No users are blocked</p>";
@@ -35,7 +35,7 @@ namespace projectc_.hala2
             foreach (var user in blockedUsers)
             {
                 string[] userb = user.Split('|');
-                blockedUser.InnerHtml += $"<tr><td>{count}</td><td>{userb[1]}</td><td>{userb[2]}</td><td>{"Unreturned Books."}</td></tr>";
+                blockedUser.InnerHtml += $"<tr><td>{count}</td><td>{userb[0]}</td><td>{userb[1]}</td><td>{"Unreturned Books."}</td></tr>";
 
                 count++;
             }

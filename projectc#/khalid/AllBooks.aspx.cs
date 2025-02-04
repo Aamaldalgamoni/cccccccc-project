@@ -207,7 +207,7 @@ namespace projectc_.khalid
         [WebMethod]
         public static string BorrowBook(string bookId, string title, string author, string category, string imageName)
         {
-            string email = "khalid@gmail.com"; // تأكد من جلب البريد الإلكتروني بشكل صحيح
+            string email = GetUserEmail(); // تأكد من جلب البريد الإلكتروني بشكل صحيح
 
             if (string.IsNullOrEmpty(email))
             {
@@ -241,7 +241,7 @@ namespace projectc_.khalid
         // دالة لتحميل البريد الإلكتروني من الملف UserData.txt
         private static string GetUserEmail()
         {
-            string userDataFilePath = HttpContext.Current.Server.MapPath("UserData.txt");
+            string userDataFilePath = HttpContext.Current.Server.MapPath("~/App_Data/logged.txt");
             if (File.Exists(userDataFilePath))
             {
                 string[] userData = File.ReadAllLines(userDataFilePath);
@@ -258,7 +258,7 @@ namespace projectc_.khalid
         [WebMethod]
         public static string ReturnBook(string bookId)
         {
-            string email = "khalid@gmail.com"; // تأكد من جلب البريد الإلكتروني بشكل صحيح
+            string email = GetUserEmail(); // تأكد من جلب البريد الإلكتروني بشكل صحيح
 
             if (string.IsNullOrEmpty(email))
             {
@@ -283,7 +283,7 @@ namespace projectc_.khalid
         {
             //string email = HttpContext.Current.Session["UserEmail"] as string;
 
-            string email = "khalid@gmail.com";
+            string email = GetUserEmail();
 
             if (string.IsNullOrEmpty(email))
             {

@@ -3,130 +3,118 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
-        /* General Body Styling */
+        /* General Styling */
         body {
-            background-color: #f4f7fc;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            text-align: center;
+            padding-top: 40px;
         }
 
-        /* Center the Card Container */
+        /* Card Container */
         #card {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-            padding: 10px;
+            margin-top: 20px;
+            padding: 20px;
         }
 
         /* Card Styling */
         .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
             overflow: hidden;
-            width: 22rem; /* Increased width for larger screens */
-            margin-bottom: 30px;
+            width: 350px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
         }
 
         .card-img-top {
-            object-fit: cover;
             width: 100%;
-            height: 200px; /* Fixed height for all cards */
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
         }
 
-        /* Card Body Styling */
         .card-body {
-            background-color: #ffffff;
             padding: 20px;
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            color: #333;
+            margin-bottom: 10px;
+            color: #FFD700;
         }
 
         .card-text {
-            color: #555;
             font-size: 14px;
-            margin-bottom: 20px;
+            color: #ddd;
+            margin-bottom: 15px;
         }
 
-        /* Button Styling */
+        /* Buttons */
         .btn-primary {
-            width: 100%;
-            background-color: #007bff;
-            border-color: #007bff;
+            background: #ff9800;
+            border: none;
+            padding: 10px;
             font-size: 16px;
-            padding: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 5px;
+            font-weight: bold;
+            border-radius: 25px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Responsive Styling for Smaller Screens */
-        @media (max-width: 992px) {
-            .card {
-                width: 48%; /* Two cards per row on medium screens */
-            }
+            background: #e68900;
         }
 
         @media (max-width: 768px) {
             .card {
-                width: 100%; /* Full width on smaller screens */
-                margin-bottom: 20px;
-            }
-
-            #card {
-                gap: 20px;
-                flex-direction: column; /* Stack cards vertically */
-                margin-top: 20px;
-            }
-
-            .card-img-top {
-                height: 150px; /* Smaller images for small screens */
+                width: 90%;
             }
         }
 
     </style>
-    <title>User Page</title>
+    <title>User Dashboard</title>
 </head>
 <body>
     <form id="form2" runat="server">
-        <div>
-            <div id="card">
-                <!-- First Card: See A Room -->
-                <div class="card">
-                    <img class="card-img-top" src="u1.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">See A Room Meeting</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <asp:Button class="btn btn-primary" Text="See" runat="server" OnClick="Unnamed_Click"/>
-                    </div>
+        <h2 class="mb-4">Welcome to Your Dashboard 🎉</h2>
+        <div id="card">
+            <!-- See A Room -->
+            <div class="card">
+                <img class="card-img-top" src="u1.jpg" alt="Room Image">
+                <div class="card-body">
+                    <h5 class="card-title">See A Room Meeting</h5>
+                    <p class="card-text">Check the available rooms for your meetings.</p>
+                    <asp:Button class="btn btn-primary" Text="See Room" runat="server" OnClick="Unnamed_Click"/>
                 </div>
-                <!-- Second Card: Reserve A Room -->
-                <div class="card">
-                    <img class="card-img-top" src="u2.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Reserve A Room Meeting</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <asp:Button runat="server" OnClick="Unnamed_Click1" class="btn btn-primary" Text="Reserve" />
-                    </div>
+            </div>
+
+            <!-- Reserve A Room -->
+            <div class="card">
+                <img class="card-img-top" src="u2.jpg" alt="Reserve Room">
+                <div class="card-body">
+                    <h5 class="card-title">Reserve A Room Meeting</h5>
+                    <p class="card-text">Reserve a meeting room easily with just one click.</p>
+                    <asp:Button class="btn btn-primary" Text="Reserve Room" runat="server" OnClick="Unnamed_Click1"/>
                 </div>
             </div>
         </div>
     </form>
 </body>
 </html>
-

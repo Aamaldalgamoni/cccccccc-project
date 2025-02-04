@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace projectc_.Amal
 {
@@ -12,33 +8,41 @@ namespace projectc_.Amal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // منع أخطاء التحقق
+            this.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
         }
 
         protected void butadd_Click(object sender, EventArgs e)
         {
-            string file = Server.MapPath("addroomfile.txt"); 
-            if (!File.Exists(file))
+            string filePath = Server.MapPath("addroomfile.txt"); // تحديد مسار الملف
+
+            // التحقق من أن جميع الحقول ممتلئة
+            if (string.IsNullOrWhiteSpace(roomid.Text) ||
+                string.IsNullOrWhiteSpace(roomname.Text) ||
+                string.IsNullOrWhiteSpace(roomcapacity.Text) ||
+                string.IsNullOrWhiteSpace(roomlocation.Text))
             {
-                using (StreamWriter s1 = File.CreateText(file))
-                {
-                    s1.WriteLine($"{roomid.Text},{roomname.Text},{roomcapacity.Text},{roomlocation.Text},PANDING");
-                }
+                return;
             }
-            else
+
+            // إنشاء الملف إذا لم يكن موجودًا ثم إضافة بيانات الغرفة
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                using(StreamWriter s2=new StreamWriter(file, true))
-                {
-                    s2.WriteLine($"{roomid.Text},{roomname.Text},{roomcapacity.Text},{roomlocation.Text},PANDING");
-
-                }
+                writer.WriteLine($"{roomid.Text},{roomname.Text},{roomcapacity.Text},{roomlocation.Text},PENDING");
             }
 
-            Response.Redirect("~/hala2/WebForm1.aspx");
-            }
+            // إعادة توجيه المستخدم بعد الإضافة
+            Response.Redirect("~/hala2/RoomCards.aspx");
+        }
 
-        protected void back2_Click(object sender, EventArgs e) { Response.Redirect("~/hala2/WebForm1.aspx");
-        
-        }  
+        //protected void back2_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~hala2/WebForm1.aspx"); // استبدل باسم الصفحة السابقة
+        //}
+
+        protected void btnGoHome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/hala2/RoomCards.aspx"); // استبدل باسم الصفحة الرئيسية
+        }
     }
-    }
+}

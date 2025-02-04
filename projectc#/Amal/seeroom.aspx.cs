@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace projectc_.Amal
 {
@@ -14,44 +11,48 @@ namespace projectc_.Amal
         {
             if (!IsPostBack)
             {
-                BindRoomData(); // استدعاء دالة لربط بيانات الغرف
+                BindRoomData();
             }
         }
 
         private void BindRoomData()
         {
-            string roomFile = Server.MapPath("addroomfile.txt"); // مسار ملف الغرف
-            string[] roomData = File.ReadAllLines(roomFile); // قراءة بيانات الغرف
+            string roomFile = Server.MapPath("addroomfile.txt");
+            string[] roomData = File.Exists(roomFile) ? File.ReadAllLines(roomFile) : new string[0];
 
-            string reservationFile = Server.MapPath("reserveroom.txt"); // مسار ملف الحجوزات
-            string[] reservationData = File.Exists(reservationFile) ? File.ReadAllLines(reservationFile) : new string[0]; // قراءة بيانات الحجوزات إذا كان الملف موجودًا
+            string reservationFile = Server.MapPath("reserveroom.txt");
+            string[] reservationData = File.Exists(reservationFile) ? File.ReadAllLines(reservationFile) : new string[0];
 
-            string tableContent = ""; // متغير لتخزين محتوى الجدول
+            string tableContent = "";
 
-            foreach (var line in roomData) // التكرار على كل غرفة
+            foreach (var line in roomData)
             {
-                string[] roomLine = line.Split(','); // تقسيم بيانات الغرفة
-                string roomID = roomLine[0]; // الحصول على Room ID
-                string status = "Free to Book"; // الحالة الافتراضية
+                string[] roomLine = line.Split(',');
+                string roomID = roomLine[0];
+                string statusClass = "status-free";
+                string statusText = "Free to Book";
 
-                // التحقق من حالة الحجز
-                foreach (var resLine in reservationData) // التكرار على كل حجز
+                foreach (var resLine in reservationData)
                 {
-                    string[] resData = resLine.Split(','); // تقسيم بيانات الحجز
-                    if (resData[0] == roomID && resData.Length > 4 && resData[4] == "Approved") // إذا كان الحجز معتمدًا
+                    string[] resData = resLine.Split(',');
+                    if (resData[0] == roomID && resData.Length > 4 && resData[4] == "Approved")
                     {
-                        status = "Booked"; // تغيير الحالة إلى Booked
-
+                        statusClass = "status-booked";
+                        statusText = "Booked";
                         break;
                     }
                 }
-                tableContent += $"<tr><th>{roomLine[0]}</th><td>{roomLine[1]}</td><td>{roomLine[2]}</td><td>{roomLine[3]}</td><td>{status}</td></tr>";
 
-
-                // إضافة صف جديد إلى الجدول
+                tableContent += $"<tr>" +
+                                $"<td>{roomLine[0]}</td>" +
+                                $"<td>{roomLine[1]}</td>" +
+                                $"<td>{roomLine[2]}</td>" +
+                                $"<td>{roomLine[3]}</td>" +
+                                $"<td><span class='{statusClass}'>{statusText}</span></td>" +
+                                $"</tr>";
             }
 
-            table1.InnerHtml = tableContent; // تعيين محتوى الجدول
+            table1.InnerHtml = tableContent;
         }
 
         protected void goreserve_Click(object sender, EventArgs e)

@@ -1,1 +1,11 @@
-anas@anas.com|2|Atomic Habits|James Clear|Psychology|81ANaVZk5LL.jpg|borrowed|false
+﻿vvvv5@gmail.com|1|Thinking, Fast and Slow|Daniel Kahneman|Psychology|thinking.jpg|borrowed|false
+vvvv5@gmail.com|2|Atomic Habits|James Clear|Psychology|81ANaVZk5LL.jpg|borrowed|false
+vvvv5@gmail.com|3|The Power of Habit|Charles Duhigg|Psychology|habits.jpg|borrowed|false
+vvvv5@gmail.com|4|The 48 Laws of Power|Robert Greene|Psychology|PowerOfHabits.jpg|borrowed|false
+vvvv5@gmail.com|5|Grit: The Power of Passion and Perseverance|Angela Duckworth|Psychology|PowerOfPassion.jpg|borrowed|false
+vvvv5@gmail.com|6|C# in Depth|Jon Skeet|Programming|cSharp.jpg|borrowed|false
+vvvv5@gmail.com|22|Mohamad|Mohamad|pROG|51E2055ZGUL._AC_UF1000,1000_QL80_.jpg|pending approval|false
+vvvv5@gmail.com|8|You Don�t Know JS|Kyle Simpson|Programming|JS.jpg|borrowed|false
+vvvv5@gmail.com|14|Contagious: How to Build Word of Mouth in the Digital Age|Jonah Berger|Marketing|congratus.jpg|borrowed|false
+vvvv5@gmail.com|11|Influence: The Psychology of Persuasion|Robert Cialdini|Marketing|influnce.jpg|pending approval|false
+amalmal@gmail.com|17|The Intelligent Investor|Benjamin Graham|Finance|intelligent.jpg|pending approval|false

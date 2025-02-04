@@ -64,69 +64,134 @@ namespace projectc_.khalid
         }
 
         // Handles accept or cancel actions from the GridView
-        // Handles accept or cancel actions from the GridView
-        // Handles accept or cancel actions from the GridView
-        // Handles accept or cancel actions from the GridView
+
         protected void BooksGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "AcceptRequest")
+            string bookId = e.CommandArgument.ToString();
+            string borrowFilePath = Server.MapPath("borrow.txt");
+
+            if (!File.Exists(borrowFilePath))
             {
-                string bookId = e.CommandArgument.ToString();
-                string borrowFilePath = Server.MapPath("borrow.txt");
+                lblMessage.Text = "خطأ: لم يتم العثور على ملف borrow.txt.";
+                lblMessage.Visible = true;
+                return;
+            }
 
-                if (!File.Exists(borrowFilePath))
+            string[] borrowedBooks = File.ReadAllLines(borrowFilePath);
+            var updatedRequests = new List<string>();
+            string email = string.Empty;
+            string bookTitle = string.Empty;
+            string newStatus = "";
+
+            foreach (string book in borrowedBooks)
+            {
+                string[] parts = book.Split('|');
+
+                if (parts.Length >= 7 && parts[1] == bookId)
                 {
-                    lblMessage.Text = "Error: borrow.txt not found.";
-                    lblMessage.Visible = true;
-                    return;
-                }
+                    email = parts[0];
+                    bookTitle = parts[2];
 
-                // Read all borrow requests
-                string[] borrowedBooks = File.ReadAllLines(borrowFilePath);
-                var updatedRequests = new List<string>();
-                string email = string.Empty;
-                string bookTitle = string.Empty;
-
-                foreach (string book in borrowedBooks)
-                {
-                    string[] parts = book.Split('|');
-
-                    if (parts.Length >= 7 && parts[1] == bookId)
+                    if (e.CommandName == "AcceptRequest")
                     {
-                        email = parts[0]; // Get the user's email
-                        bookTitle = parts[2]; // Get the book title
-
-                        // Check if the email is in the blacklist
                         if (IsEmailInBlacklist(email))
                         {
-                            lblMessage.Text = "This user is blacklisted and cannot borrow books.";
+                            lblMessage.Text = "هذا المستخدم محظور من الاستعارة.";
                             lblMessage.Visible = true;
                             return;
                         }
 
-                        // Change status to "borrowed"
-                        parts[6] = "borrowed";
+                        newStatus = "borrowed";
+                        parts[6] = newStatus;
                     }
-
-                    updatedRequests.Add(string.Join("|", parts));
+                    else if (e.CommandName == "CancelRequest")
+                    {
+                        newStatus = "rejected";
+                        parts[6] = newStatus;
+                    }
                 }
 
-                // Write back the updated list
-                File.WriteAllLines(borrowFilePath, updatedRequests);
+                updatedRequests.Add(string.Join("|", parts));
+            }
 
-                lblMessage.Text = "Borrow request approved.";
-                lblMessage.Visible = true;
+            // إعادة كتابة الملف بعد التحديث
+            File.WriteAllLines(borrowFilePath, updatedRequests);
 
-                // Start the countdown for the user after accepting the request
-                if (!string.IsNullOrEmpty(email))
+            // تحديث حالة الأزرار بدون إعادة تحميل الصفحة
+            GridViewRow row = ((Button)e.CommandSource).NamingContainer as GridViewRow;
+            if (row != null)
+            {
+                Button btnAccept = (Button)row.FindControl("btnAccept");
+                Button btnCancel = (Button)row.FindControl("btnCancel");
+                Label lblStatus = (Label)row.FindControl("lblStatus");
+
+                if (btnAccept != null && btnCancel != null && lblStatus != null)
                 {
-                    StartCountdownForReturn(email, bookId, bookTitle); // Pass book title as well
-                }
+                    lblStatus.Text = newStatus;
+                    lblStatus.CssClass = newStatus == "borrowed" ? "text-success" : "text-danger";
+                    btnAccept.Enabled = false;
+                    btnCancel.Enabled = false;
 
-                // Refresh the grid to reflect the change
-                LoadRequestedBooks();
+                    if (newStatus == "borrowed")
+                    {
+                        btnAccept.Text = "Accepted";
+                    }
+                    else if (newStatus == "rejected")
+                    {
+                        btnCancel.Text = "Rejected";
+                    }
+                }
+            }
+
+            lblMessage.Text = newStatus == "borrowed" ? "تمت الموافقة على طلب الاستعارة." : "تم رفض طلب الاستعارة.";
+            lblMessage.Visible = true;
+
+            // بدء العد التنازلي إن كان الطلب مقبولًا
+            if (newStatus == "borrowed" && !string.IsNullOrEmpty(email))
+            {
+                StartCountdownForReturn(email, bookId, bookTitle);
+            }
+
+            LoadRequestedBooks();
+        }
+
+        protected void BooksGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Button btnAccept = (Button)e.Row.FindControl("btnAccept");
+                Button btnCancel = (Button)e.Row.FindControl("btnCancel");
+                Label lblStatus = (Label)e.Row.FindControl("lblStatus");
+
+                if (btnAccept != null && btnCancel != null && lblStatus != null)
+                {
+                    string status = DataBinder.Eval(e.Row.DataItem, "Status").ToString();
+
+                    if (status == "borrowed")
+                    {
+                        btnAccept.Text = "Accepted";
+                        btnAccept.Enabled = false;
+                        btnCancel.Enabled = false;
+                        lblStatus.Text = "Borrowed";
+                        lblStatus.CssClass = "text-success";
+                    }
+                    else if (status == "rejected")
+                    {
+                        btnCancel.Text = "Rejected";
+                        btnCancel.Enabled = false;
+                        btnAccept.Enabled = false;
+                        lblStatus.Text = "Rejected";
+                        lblStatus.CssClass = "text-danger";
+                    }
+                    else
+                    {
+                        lblStatus.Text = "Pending";
+                        lblStatus.CssClass = "text-warning";
+                    }
+                }
             }
         }
+
 
 
 

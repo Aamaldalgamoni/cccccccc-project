@@ -87,8 +87,6 @@
                                     <td><%# Eval("BookTitle") %></td>
                                     <td><%# Eval("Author") %></td>
                                     <td><%# Eval("Category") %></td>
-                                    <td><%# Eval("BorrowDate") %></td>
-                                    <td><%# Eval("ReturnDate") %></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>

@@ -100,6 +100,17 @@
     <Content Include="Amal\userdata.txt" />
     <Content Include="Anas\page2.aspx" />
     <Content Include="Amal\editnew.aspx" />
+    <Content Include="App_Data\BlockedUsers.txt" />
+    <Content Include="App_Data\Books.txt" />
+    <Content Include="App_Data\BorrowedBooks.txt" />
+    <Content Include="App_Data\Feedback.txt" />
+    <Content Include="App_Data\FeedbackData.txt" />
+    <Content Include="App_Data\logged.txt" />
+    <Content Include="App_Data\ReservedRooms.txt" />
+    <Content Include="App_Data\UserBooks.txt" />
+    <Content Include="App_Data\UserData.txt" />
+    <Content Include="App_Data\UserHistory.txt" />
+    <Content Include="App_Data\UserRooms.txt" />
     <Content Include="hala2\.gitignore" />
     <Content Include="hala2\BlackList.aspx" />
     <Content Include="hala2\BookCards.aspx" />

@@ -245,9 +245,9 @@ namespace projectc_.khalid
             if (File.Exists(userDataFilePath))
             {
                 string[] userData = File.ReadAllLines(userDataFilePath);
-                if (userData.Length > 1)
+                if (userData.Length >= 1)
                 {
-                    return userData[1];  // البريد الإلكتروني في الفهرس 1
+                    return userData[0];  // البريد الإلكتروني في الفهرس 1
                 }
             }
             return null;  // إذا لم يتم العثور على البريد

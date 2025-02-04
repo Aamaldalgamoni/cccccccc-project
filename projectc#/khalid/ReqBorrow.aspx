@@ -17,7 +17,11 @@
             <asp:Label ID="lblMessage" runat="server" CssClass="alert" Visible="false"></asp:Label>
 
             <!-- GridView displaying books -->
-            <asp:GridView ID="BooksGridView" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnRowCommand="BooksGridView_RowCommand">
+            <asp:GridView ID="BooksGridView" runat="server" AutoGenerateColumns="False"
+                CssClass="table table-bordered"
+                OnRowCommand="BooksGridView_RowCommand"
+                OnRowDataBound="BooksGridView_RowDataBound">
+
                 <Columns>
                     <asp:BoundField DataField="BookId" HeaderText="Book ID" SortExpression="BookId" />
                     <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
@@ -25,19 +29,29 @@
                     <asp:BoundField DataField="Category" HeaderText="Category" SortExpression="Category" />
                     <asp:BoundField DataField="ImagePath" HeaderText="Image Path" SortExpression="ImagePath" />
 
+                    <asp:TemplateField HeaderText="Status">
+                        <ItemTemplate>
+                            <asp:Label ID="lblStatus" runat="server" CssClass="fw-bold"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <!-- Accept and Cancel buttons -->
-                            <asp:Button ID="btnAccept" runat="server" Text="Accept" CommandName="AcceptRequest" CommandArgument='<%# Eval("BookId") %>' CssClass="btn btn-success" />
-                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" CommandName="CancelRequest" CommandArgument='<%# Eval("BookId") %>' CssClass="btn btn-danger" />
+                            <asp:Button ID="btnAccept" runat="server" Text="Accept"
+                                CommandName="AcceptRequest"
+                                CommandArgument='<%# Eval("BookId") %>'
+                                CssClass="btn btn-success" />
 
-                            <!-- Labels to show Approved or Rejected -->
-                            <asp:Label ID="lblApproved" runat="server" Text="Approved" CssClass="text-success" Visible="false" />
-                            <asp:Label ID="lblRejected" runat="server" Text="Rejected" CssClass="text-danger" Visible="false" />
+                            <asp:Button ID="btnCancel" runat="server" Text="Cancel"
+                                CommandName="CancelRequest"
+                                CommandArgument='<%# Eval("BookId") %>'
+                                CssClass="btn btn-danger" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+
+
 
 
 

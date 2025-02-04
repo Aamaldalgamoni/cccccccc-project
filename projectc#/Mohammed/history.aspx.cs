@@ -9,7 +9,8 @@ namespace projectc_.Mohammed
     public partial class history : System.Web.UI.Page
     {
         string roomsFilePath = HttpContext.Current.Server.MapPath("~/App_Data/UserRooms.txt");
-        string booksFilePath = HttpContext.Current.Server.MapPath("~/App_Data/UserBooks.txt");
+        string booksFilePath = HttpContext.Current.Server.MapPath("~/khalid/books.txt");
+        string loggedFilePath = HttpContext.Current.Server.MapPath("~/App_Data/logged.txt"); // الملف الذي يحتوي على البريد المسجل
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,7 +18,15 @@ namespace projectc_.Mohammed
             {
                 lblUserName.Text = Session["UserName"]?.ToString() ?? "User";
                 EnsureFilesExist(); // ✅ إنشاء الملفات إذا لم تكن موجودة
-                LoadUserHistory();
+
+                if (IsUserLoggedIn()) // تحقق من وجود البريد في ملف logged.txt
+                {
+                    LoadUserHistory(); // تحميل سجل المستخدم
+                }
+                else
+                {
+                    Response.Redirect("login.aspx"); // إذا لم يكن البريد موجودًا في ملف logged.txt
+                }
             }
             else
             {
@@ -37,6 +46,28 @@ namespace projectc_.Mohammed
             {
                 File.Create(booksFilePath).Close(); // إنشاء ملف كتب فارغ
             }
+
+            if (!File.Exists(loggedFilePath))
+            {
+                File.Create(loggedFilePath).Close(); // إنشاء ملف logged فارغ
+            }
+        }
+
+        // ✅ تحقق من وجود البريد الإلكتروني في ملف logged.txt
+        private bool IsUserLoggedIn()
+        {
+            string userEmail = Session["UserEmail"].ToString();
+            string[] loggedUsers = File.ReadAllLines(loggedFilePath);
+
+            foreach (string line in loggedUsers)
+            {
+                string[] parts = line.Split('|');
+                if (parts.Length >= 1 && parts[0] == userEmail) // تحقق من تطابق البريد الإلكتروني
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // ✅ تحميل السجل
@@ -47,11 +78,13 @@ namespace projectc_.Mohammed
 
             string userEmail = Session["UserEmail"].ToString();
 
-            // ✅ قراءة البيانات من ملف الكتب المستعارة
-            foreach (string line in File.ReadAllLines(booksFilePath))
+            // ✅ قراءة البيانات من ملف الكتب المحجوزة (books.txt)
+            string[] book1 = File.ReadAllLines(booksFilePath);
+
+            foreach (string line in book1)
             {
                 string[] data = line.Split('|');
-                if (data.Length >= 6 && data[0] == userEmail)
+                if (data.Length >= 7 && data[0] == userEmail) // تحقق من تطابق البريد الإلكتروني مع الكتاب
                 {
                     books.Add(new
                     {
@@ -65,7 +98,7 @@ namespace projectc_.Mohammed
                 }
             }
 
-            // ✅ قراءة البيانات من ملف الغرف المحجوزة
+            // ✅ قراءة البيانات من ملف الغرف المحجوزة (UserRooms.txt)
             foreach (string line in File.ReadAllLines(roomsFilePath))
             {
                 string[] data = line.Split('|');

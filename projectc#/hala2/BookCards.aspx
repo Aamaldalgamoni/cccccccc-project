@@ -174,7 +174,7 @@
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top" src="https://i.pinimg.com/236x/c4/21/04/c4210491e34a34d4c6f0d95628bc7850.jpg" alt="Card image cap" />
                                 <div class="card-body">
-                                    <h5 class="card-title">View All Books</h5>
+                                    <h5 class="card-title">Requested Books</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <asp:Button runat="server" ID="allBooksAdmin" class="btn btn-primary" Text="View " OnClick="allBooksAdmin_Click" />
 

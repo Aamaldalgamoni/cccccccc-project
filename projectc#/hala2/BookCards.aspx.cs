@@ -17,7 +17,7 @@ namespace projectc_.hala2
 
         protected void allBooksAdmin_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Khalid/AllBooks.aspx");
+            Response.Redirect("../Khalid/ReqBorrow.aspx");
         }
         protected void addBook_Click(object sender, EventArgs e)
         {

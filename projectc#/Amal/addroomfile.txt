@@ -1,4 +1,4 @@
-1,ROOOM#1,5,IRBID,PANDING
+1,ROOOM#33,50,IRBIDs
 2,amalll,11,amman
 3,royal,3,irbid,PANDING
 4,orange,2,amman1

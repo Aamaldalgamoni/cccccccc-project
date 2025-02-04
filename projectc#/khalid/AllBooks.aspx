@@ -108,10 +108,11 @@
         <div class="container mt-4">
             <h2 class="text-center mb-4">Available Books</h2>
 
-            <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary"
+         <%--   <asp:LinkButton ID="backButton" runat="server" CssClass="btn btn-secondary"
                 OnClick="back_Click">
                 <i class="fa-solid fa-arrow-left fa-2x"></i> 
-            </asp:LinkButton>
+            </asp:LinkButton>--%>
+
 
 
 

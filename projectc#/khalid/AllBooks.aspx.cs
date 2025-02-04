@@ -88,7 +88,7 @@ namespace projectc_.khalid
         private void LoadUserHistory()
         {
             string borrowFilePath = Server.MapPath("borrow.txt");
-            string email = Session["UserEmail"] as string;
+            string email = GetUserEmail();
 
             if (string.IsNullOrEmpty(email)) return;
 
@@ -311,7 +311,9 @@ namespace projectc_.khalid
 
         protected void back_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~hala2/Webform1.aspx");
+            Response.Redirect("~/Mohammed/userdashboard.aspx");
         }
+
+       
     }
 }
